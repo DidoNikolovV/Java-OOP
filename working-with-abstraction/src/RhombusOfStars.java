@@ -11,39 +11,27 @@ public class RhombusOfStars {
     
     public static void printRhombus(int size) {
         for(int i = 1; i <= size; i++) {
-            printUpperPart(size, i);
+            printTriangle(size - i, i);
+
         }
 
         for(int i = 1; i <= size - 1; i++) {
-            printBottomPart(size, i);
+            printTriangle(i, size - i);
         }
 
     }
 
-    private static void printBottomPart(int size, int i) {
+    private static void printTriangle(int firstCount, int secondCount) {
         // Print increasingPattern
-        for (int j = 0; j < i; j++) {
+        for (int i = 0; i < firstCount; i++) {
             System.out.print(" ");
         }
-        for (int j = 0; j < size - i; j++) {
+        for (int i = 0; i < secondCount; i++) {
             System.out.print("* ");
         }
 
         System.out.println();
     }
 
-
-    private static void printUpperPart(int size, int i) {
-        for (int j = 0; j < size - i; j++) {
-            System.out.print(" ");
-        }
-
-        // Print increasingPattern
-        for (int j = 0; j < i; j++) {
-            System.out.print("* ");
-        }
-        System.out.println();
-    }
-    
     
 }
