@@ -1,31 +1,31 @@
 package TrafficLights;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String[] input = scanner.nextLine().split(" ");
-        ArrayDeque<String> lights = new ArrayDeque<>();
+        List<String> colors = Arrays.stream(scanner.nextLine().split(" ")).collect(Collectors.toList());
 
-        for(String el: input) {
-            lights.offer(el);
+        List<TrafficLight> trafficLights = new ArrayList<>();
+
+        for (String color : colors) {
+            Color currentColor = Color.valueOf(color);
+            TrafficLight currentTrafficLight = new TrafficLight(currentColor);
+            trafficLights.add(currentTrafficLight);
         }
+
         int n = Integer.parseInt(scanner.nextLine());
 
-        int size = lights.size();
-        while(n-- > 0) {
-            for(int i = 0; i < size; i++) {
-                String currentLight = lights.pop();
-                TrafficLight trafficLight = TrafficLight.valueOf(currentLight);
-                System.out.print(trafficLight.getLight() + " ");
-                lights.offer(trafficLight.getLight());
+        for(int i = 0; i < n; i++) {
+            for (TrafficLight trafficLight : trafficLights) {
+                trafficLight.changeColor();
+                System.out.print(trafficLight.getCurrentColor() + " ");
             }
             System.out.println();
         }
+
+
     }
 }

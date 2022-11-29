@@ -1,17 +1,29 @@
 package TrafficLights;
 
-public enum TrafficLight {
-    RED("GREEN"),
-    GREEN("YELLOW"),
-    YELLOW("RED");
+public class TrafficLight {
+    private Color currentColor;
 
-    private String light;
-
-    TrafficLight(String light) {
-        this.light = light;
+    TrafficLight(Color currentColor) {
+        this.currentColor = currentColor;
     }
 
-    public String getLight() {
-        return light;
+    public Color getCurrentColor() {
+        return currentColor;
+    }
+
+    public void changeColor() {
+        switch(currentColor) {
+            case RED:
+                this.currentColor = Color.GREEN;
+                break;
+            case GREEN:
+                this.currentColor = Color.YELLOW;
+            break;
+            case YELLOW:
+                this.currentColor = Color.RED;
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid color");
+        }
     }
 }
