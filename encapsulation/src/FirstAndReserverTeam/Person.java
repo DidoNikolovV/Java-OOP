@@ -56,14 +56,6 @@ public class Person {
         this.salary = salary;
     }
 
-    public void increaseSalary(double bonus) {
-        if(this.getAge() < 30) {
-            this.salary = this.salary + this.salary * bonus / 200;
-        } else {
-            this.salary = this.salary + this.salary * bonus / 100;
-        }
-
-    }
 
     @Override
     public String toString() {
