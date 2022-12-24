@@ -1,30 +1,19 @@
 package Vehicles;
 
 public class Car extends Vehicle{
-
-    public Car(Double fuelQuantity, double fuelConsumption) {
-        this.setFuelQuantity(fuelQuantity);
-        this.setFuelConsumption(fuelConsumption);
-        this.setName("Car");
+    public Car(double fuelQuantity, double fuelConsumption) {
+        super(fuelQuantity, fuelConsumption);
+        this.fuelConsumption += 0.9;
     }
 
     @Override
-    public void drive(double distance) {
-        if(canBeDriven(distance)) {
-            double fuelLeft = this.getFuelQuantity() - (getFuelConsumption() + getFuelConsumption() * 1.9) * distance;
-            this.setFuelQuantity(fuelLeft);
-        }
+    void drive(double distance) {
+        this.fuelQuantity -= fuelConsumption * distance;
     }
 
     @Override
-    public void refuel(double fuel) {
-        this.setFuelQuantity(this.getFuelQuantity() + fuel);
-    }
+    void refuel(double fuel) {
+        this.fuelQuantity += fuel;
 
-    @Override
-    public boolean canBeDriven(double distance) {
-        double fuelNeeded = (getFuelConsumption() + (getFuelConsumption() * 0.9)) * distance;
-        return this.getFuelQuantity() >= fuelNeeded;
     }
-
 }

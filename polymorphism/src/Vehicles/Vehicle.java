@@ -1,35 +1,22 @@
 package Vehicles;
 
 public abstract class Vehicle {
-    private String name;
-    private double fuelQuantity;
-    private double fuelConsumption;
+    double fuelQuantity;
+    double fuelConsumption;
 
-    public double getFuelQuantity() {
-        return fuelQuantity;
-    }
-
-    protected void setFuelQuantity(double fuelQuantity) {
+    public Vehicle(double fuelQuantity, double fuelConsumption) {
         this.fuelQuantity = fuelQuantity;
-    }
-
-    public double getFuelConsumption() {
-        return fuelConsumption;
-    }
-
-    protected void setFuelConsumption(double fuelConsumption) {
         this.fuelConsumption = fuelConsumption;
     }
 
-    public abstract void drive(double distance);
-    public abstract void refuel(double fuel);
-    public abstract boolean canBeDriven(double distance);
+    abstract void drive(double distance);
+    abstract void refuel(double fuel);
 
-    public void setName(String name) {
-        this.name = name;
+    boolean canDrive(double distance) {
+        double fuelNeeded = this.fuelConsumption * distance;
+        return this.fuelQuantity >= fuelNeeded;
     }
 
-    public String getName() {
-        return name;
-    }
+
+
 }

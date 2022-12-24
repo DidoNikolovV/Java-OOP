@@ -1,45 +1,55 @@
 package Vehicles;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String[] carInput = scanner.nextLine().split(" ");
-        String[] truckInput = scanner.nextLine().split(" ");
-
-        Vehicle car = new Car(Double.parseDouble(carInput[1]), Double.parseDouble(carInput[2]));
-        Vehicle truck = new Truck(Double.parseDouble(truckInput[1]), Double.parseDouble(truckInput[2]));
-
-        List<Vehicle> vehicles = new ArrayList<>();
-        vehicles.add(car);
-        vehicles.add(truck);
+        String[] carInfo = scanner.nextLine().split(" ");
+        Vehicle car = new Car(Double.parseDouble(carInfo[1]), Double.parseDouble(carInfo[2]));
+        String[] truckInfo = scanner.nextLine().split(" ");
+        Vehicle truck = new Truck(Double.parseDouble(truckInfo[1]), Double.parseDouble(truckInfo[2]));
 
         int nCommands = Integer.parseInt(scanner.nextLine());
 
+        DecimalFormat format = new DecimalFormat("0.##");
+
         while(nCommands-- > 0) {
-            String[] inputLine = scanner.nextLine().split(" ");
-            String command = inputLine[0];
-            Vehicle vehicle = inputLine[1].equals("Car") ? vehicles.get(0) : vehicles.get(1);
-            if(command.equals("Drive")) {
-                double distance = Double.parseDouble(inputLine[2]);
-                if(vehicle.canBeDriven(distance)) {
-                    vehicle.drive(distance);
-                    System.out.printf("%s travelled %.2f km%n", inputLine[1], distance);
-                } else {
-                    System.out.printf("%s needs refueling%n", inputLine[1]);
+            String command = scanner.nextLine();
+            String[] cmdParts = command.split(" ");
+            String cmdType = cmdParts[0];
+            String vehicleType = cmdParts[1];
+            if(cmdType.equals("Drive")) {
+                double distance = Double.parseDouble(cmdParts[2]);
+                if(vehicleType.equals("Car")) {
+                    if(car.canDrive(distance)) {
+                        car.drive(distance);
+                        System.out.println("Car travelled " + format.format(distance) + " km");
+                    } else {
+                        System.out.println("Car needs refueling");
+                    }
+                } else if(vehicleType.equals("Truck")) {
+                    if(truck.canDrive(distance)) {
+                        truck.drive(distance);
+                        System.out.println("Truck travelled " + format.format(distance) + " km");
+                    } else {
+                        System.out.println("Truck needs refueling");
+                    }
                 }
-            } else if(command.equals("Refuel")) {
-                double liters = Double.parseDouble(inputLine[2]);
-                vehicle.refuel(liters);
+
+            } else if(cmdType.equals("Refuel")) {
+                double fuel = Double.parseDouble(cmdParts[2]);
+                if(vehicleType.equals("Car")) {
+                    car.refuel(fuel);
+                } else if(vehicleType.equals("Truck")) {
+                    truck.refuel(fuel);
+                }
             }
         }
 
-        for (Vehicle vehicle : vehicles) {
-            System.out.printf("%s: %.2f%n", vehicle.getName(), vehicle.getFuelQuantity());
-        }
+        System.out.printf("Car: %.2f%n", car.fuelQuantity);
+        System.out.printf("Truck: %.2f%n", truck.fuelQuantity);
     }
 }
