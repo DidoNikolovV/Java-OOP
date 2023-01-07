@@ -44,7 +44,11 @@ public class ChainblockImpl implements Chainblock{
     }
 
     public Transaction getById(int id) {
-        return null;
+        if(!transactionMap.containsKey(id)) {
+            throw new IllegalArgumentException();
+        }
+
+        return transactionMap.get(id);
     }
 
     public Iterable<Transaction> getByTransactionStatus(TransactionStatus status) {

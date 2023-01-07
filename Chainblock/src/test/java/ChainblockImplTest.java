@@ -100,5 +100,18 @@ public class ChainblockImplTest {
         chainblock.removeTransactionById(3);
     }
 
+    @Test
+    public void testGetById_ShouldReturnTransactionWithGivenId() {
+        Transaction transaction = transactions.get(0);
+        chainblock.add(transaction);
+        Assert.assertEquals(transaction, chainblock.getById(0));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetById_ShouldThrowIfNoSuchTransactionExists() {
+        chainblock.add(transactions.get(0));
+        chainblock.getById(1);
+    }
+
 
 }
