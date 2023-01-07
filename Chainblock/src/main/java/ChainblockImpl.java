@@ -36,7 +36,11 @@ public class ChainblockImpl implements Chainblock{
     }
 
     public void removeTransactionById(int id) {
+        if(!transactionMap.containsKey(id)){
+            throw new IllegalArgumentException();
+        }
 
+        transactionMap.remove(id);
     }
 
     public Transaction getById(int id) {

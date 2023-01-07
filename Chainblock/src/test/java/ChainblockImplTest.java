@@ -83,7 +83,21 @@ public class ChainblockImplTest {
     public void testChangeTransactionStatus_ShouldThrowWhenNoSuchTransactionExists() {
         chainblock.add(transactions.get(0));
         chainblock.changeTransactionStatus(2, TransactionStatus.SUCCESSFUL);
+    }
 
+    @Test
+    public void testRemoveTransactionById_ShouldRemoveTransactionIfExists() {
+        chainblock.add(transactions.get(0));
+        chainblock.add(transactions.get(1));
+        chainblock.removeTransactionById(0);
+        Assert.assertEquals(1, chainblock.getCount());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testRemoveTransactionById_ShouldThrowIfTransactionDoesNotExist() {
+        chainblock.add(transactions.get(0));
+        chainblock.add(transactions.get(1));
+        chainblock.removeTransactionById(3);
     }
 
 
