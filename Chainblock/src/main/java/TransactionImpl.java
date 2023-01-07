@@ -22,9 +22,16 @@ public class TransactionImpl implements Comparable<TransactionImpl>, Transaction
         return id;
     }
 
+    @Override
     public TransactionStatus getStatus() {
         return status;
     }
+
+    @Override
+    public void setStatus(TransactionStatus newStatus) {
+        this.status = newStatus;
+    }
+
 
     public String getFrom() {
         return from;

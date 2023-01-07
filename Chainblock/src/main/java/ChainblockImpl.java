@@ -26,7 +26,13 @@ public class ChainblockImpl implements Chainblock{
     }
 
     public void changeTransactionStatus(int id, TransactionStatus newStatus) {
+        if(!transactionMap.containsKey(id)) {
+            throw new IllegalArgumentException();
+        }
 
+        Transaction transaction = transactionMap.get(id);
+        transaction.setStatus(newStatus);
+        transactionMap.put(id, transaction);
     }
 
     public void removeTransactionById(int id) {

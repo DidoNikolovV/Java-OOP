@@ -71,5 +71,20 @@ public class ChainblockImplTest {
         Assert.assertTrue(chainblock.contains(transactionId));
     }
 
+    @Test
+    public void testChangeTransactionStatus_ShouldChangeStatus() {
+        Transaction transaction = transactions.get(0);
+        chainblock.add(transaction);
+        chainblock.changeTransactionStatus(transaction.getId(), TransactionStatus.FAILED);
+        Assert.assertEquals(TransactionStatus.FAILED, transaction.getStatus());
+    }
+
+    @Test(expected= IllegalArgumentException.class)
+    public void testChangeTransactionStatus_ShouldThrowWhenNoSuchTransactionExists() {
+        chainblock.add(transactions.get(0));
+        chainblock.changeTransactionStatus(2, TransactionStatus.SUCCESSFUL);
+
+    }
+
 
 }
