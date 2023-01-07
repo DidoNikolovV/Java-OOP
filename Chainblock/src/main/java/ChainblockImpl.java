@@ -18,11 +18,11 @@ public class ChainblockImpl implements Chainblock{
     }
 
     public boolean contains(Transaction transaction) {
-        return false;
+        return transactionMap.containsKey(transaction.getId());
     }
 
     public boolean contains(int id) {
-        return false;
+        return transactionMap.containsKey(id);
     }
 
     public void changeTransactionStatus(int id, TransactionStatus newStatus) {

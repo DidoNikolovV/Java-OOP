@@ -50,5 +50,26 @@ public class ChainblockImplTest {
         Assert.assertEquals(1, chainblock.getCount());
     }
 
+    @Test
+    public void testContains_ShouldReturnTrue() {
+        chainblock.add(transactions.get(0));
+        boolean chainBlockContainsTransaction = chainblock.contains(transactions.get(0));
+        Assert.assertTrue(chainBlockContainsTransaction);
+    }
+
+    @Test
+    public void testContains_ShouldReturnFalse() {
+        chainblock.add(transactions.get(0));
+        boolean chainBlockContainsTransaction = chainblock.contains(transactions.get(1));
+        Assert.assertFalse(chainBlockContainsTransaction);
+    }
+
+    @Test
+    public void testContains_ShouldReturnTrueIfIdIsPresented() {
+        chainblock.add(transactions.get(0));
+        int transactionId = transactions.get(0).getId();
+        Assert.assertTrue(chainblock.contains(transactionId));
+    }
+
 
 }
